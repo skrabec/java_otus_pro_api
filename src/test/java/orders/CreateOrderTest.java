@@ -16,8 +16,11 @@ public class CreateOrderTest {
     String shipDateNow = LocalDate.now().toString();
     private StoreApi storeApi = new StoreApi();
 
+    /*
+    * this test checks valid order creation (happy path)
+    * */
+
     @Test
-    @DisplayName("This test checks valid order creation (happy path)")
     public void createValidOrder(){
 
         OrderDto order = OrderDto
@@ -39,9 +42,11 @@ public class CreateOrderTest {
             .body("status", equalTo("completed"));
     }
 
+    /*
+     * this test checks response to empty body (Negative scenario)
+     * */
 
     @Test
-    @DisplayName("Negative scenario")
     public void createOrderWithEmptyBody(){
 
         OrderDto order = OrderDto

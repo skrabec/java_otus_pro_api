@@ -11,8 +11,11 @@ public class FindAnOrder {
 
     private StoreApi storeApi = new StoreApi();
 
+    /*
+     * this test checks an order search by valid id (Happy path)
+     * */
+
     @Test
-    @DisplayName("Happy path. Search an order by valid id")
     public void searchAnOrderById() {
 
         storeApi.findAnOrder(1)
@@ -24,8 +27,11 @@ public class FindAnOrder {
             .body("status", notNullValue());
     }
 
+    /*
+     * this test checks an order search by negative id (Negative scenario)
+     * */
+
     @Test
-    @DisplayName("Negative scenario. Id equals -1")
     public void searchAnOrderByNegativeId() {
 
         storeApi.findAnOrder(-1)
