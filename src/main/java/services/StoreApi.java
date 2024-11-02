@@ -11,13 +11,12 @@ import io.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
 
 public class StoreApi {
-    private static final String BASE_URI = "https://petstore.swagger.io/v2/";
     private RequestSpecification requestSpecification;
     private ResponseSpecification responseSpecification;
 
     public StoreApi(){
         requestSpecification = given()
-            .baseUri(BASE_URI)
+            .baseUri(System.getProperty("base.url"))
             .contentType(ContentType.JSON)
             .log().all();
 
@@ -37,6 +36,16 @@ public class StoreApi {
             .spec(responseSpecification);
     }
 
+    public ValidatableResponse checkCreatedOrder(int orderId, OrderDto storeOrderDto) {
+        return given(requestSpecification)
+            .basePath("store/order/" + orderId)
+            .when()
+            .get()
+            .then()
+            .spec(responseSpecification);
+
+    }
+
     public ValidatableResponse findAnOrder(int orderId) {
         return given(requestSpecification)
             .basePath("store/order/" + orderId)
@@ -45,5 +54,15 @@ public class StoreApi {
         .then()
             .spec(responseSpecification)
             .log().all();
+    }
+
+    public ValidatableResponse deleteAnOrder(int orderId){
+        return given(requestSpecification)
+            .basePath("store/order/" + orderId)
+            .when()
+            .delete()
+            .then()
+            .spec(responseSpecification);
+
     }
 }

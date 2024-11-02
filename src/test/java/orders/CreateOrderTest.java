@@ -1,27 +1,24 @@
 package orders;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 
 import dto.OrderDto;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import services.StoreApi;
 import java.time.LocalDate;
 
 public class CreateOrderTest {
 
-    String shipDateNow = LocalDate.now().toString();
+    private String shipDateNow = LocalDate.now().toString();
     private StoreApi storeApi = new StoreApi();
 
     /*
-    * this test checks valid order creation (happy path)
-    * */
+     * this test checks valid order creation (happy path)
+     * */
 
     @Test
-    public void createValidOrder(){
+    public void createValidOrder() {
 
         OrderDto order = OrderDto
             .builder()
@@ -40,25 +37,24 @@ public class CreateOrderTest {
             .body("quantity", equalTo(1))
             .body("shipDate", startsWith(shipDateNow))
             .body("status", equalTo("completed"));
-    }
 
-    /*
-     * this test checks response to empty body (Negative scenario)
-     * */
-
-    @Test
-    public void createOrderWithEmptyBody(){
-
-        OrderDto order = OrderDto
-            .builder()
-            .build();
-
-        storeApi.createOrder(order)
+        storeApi.checkCreatedOrder(order.getId(), order)
             .statusCode(200)
-            .body("id", notNullValue())
-            .body("petId", equalTo(0))
-            .body("quantity", equalTo(0))
-            .body("shipDate", isEmptyOrNullString())
-            .body("status", isEmptyOrNullString());
+            .body("id", equalTo(order.getId()))
+            .body("petId", equalTo(order.getPetId()))
+            .body("quantity", equalTo(order.getQuantity()))
+            .body("shipDate", startsWith(order.getShipDate()))
+            .body("status", equalTo(order.getStatus()));
+
+        storeApi.deleteAnOrder(order.getId())
+            .statusCode(200)
+            .body("code", equalTo(200))
+            .body("type", equalTo("unknown"))
+            .body("message", equalTo("1"));
+
+        storeApi.checkCreatedOrder(order.getId(), order)
+            .statusCode(404);
     }
+
+
 }
