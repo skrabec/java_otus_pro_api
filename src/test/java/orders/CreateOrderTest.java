@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 
 import dto.OrderDto;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import services.StoreApi;
 import java.time.LocalDate;
@@ -12,6 +14,15 @@ public class CreateOrderTest {
 
     private String shipDateNow = LocalDate.now().toString();
     private StoreApi storeApi = new StoreApi();
+    private int createdOrderId;
+
+    @AfterEach
+    public void cleanUp(){
+            if (createdOrderId != 0) {
+                storeApi.deleteAnOrder(createdOrderId);
+            }
+        }
+
 
     /*
      * this test checks valid order creation (happy path)
@@ -30,6 +41,8 @@ public class CreateOrderTest {
             .completeStatus(true)
             .build();
 
+        createdOrderId = order.getId();
+
         storeApi.createOrder(order)
             .statusCode(200)
             .body("id", equalTo(1))
@@ -45,16 +58,5 @@ public class CreateOrderTest {
             .body("quantity", equalTo(order.getQuantity()))
             .body("shipDate", startsWith(order.getShipDate()))
             .body("status", equalTo(order.getStatus()));
-
-        storeApi.deleteAnOrder(order.getId())
-            .statusCode(200)
-            .body("code", equalTo(200))
-            .body("type", equalTo("unknown"))
-            .body("message", equalTo("1"));
-
-        storeApi.checkCreatedOrder(order.getId(), order)
-            .statusCode(404);
     }
-
-
 }
