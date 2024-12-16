@@ -17,8 +17,6 @@ import services.SoapHelper;
 import java.util.List;
 
 public class XmlTests extends SoapHelper {
-    private CoursesApi coursesApi = new CoursesApi();
-
     @Test
     public void getUsersTest() {
         Response response = given()
