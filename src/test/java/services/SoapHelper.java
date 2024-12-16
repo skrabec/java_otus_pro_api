@@ -8,9 +8,6 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class SoapHelper {
     WireMockServer wireMockServer = new WireMockServer(8080);
@@ -18,9 +15,6 @@ public class SoapHelper {
     @BeforeEach
     public void startMocks() throws IOException {
         wireMockServer.start();
-
-//        List<String> lines = Files.readAllLines((Paths.get("src/test/resources/__files/user_response.xml")));
-//        String soapResponse = String.join("\n", lines);
 
         wireMockServer.stubFor(get(urlEqualTo("/soap/user/get/1"))
             .willReturn(aResponse()

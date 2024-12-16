@@ -2,19 +2,11 @@ package tests;
 
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 
-import dto.UserDto;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-import services.CoursesApi;
 import services.SoapHelper;
-import java.util.List;
 
 public class XmlTests extends SoapHelper {
     @Test

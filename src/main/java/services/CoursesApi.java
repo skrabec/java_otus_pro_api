@@ -17,11 +17,11 @@ public class CoursesApi {
     public CoursesApi(){
         requestSpecification = given()
             .baseUri("http://localhost:8080")
-            //.contentType(ContentType.)
+            .contentType(ContentType.JSON)
             .log().all();
 
         responseSpecification = RestAssured.expect();
-        responseSpecification.contentType(ContentType.XML);
+        responseSpecification.contentType(ContentType.JSON);
         responseSpecification.time(Matchers.lessThan(5000L));
     }
 
@@ -54,16 +54,4 @@ public class CoursesApi {
             .then()
             .spec(responseSpecification);
     }
-
-    public ValidatableResponse getXmlUsers(int userId) {
-        return given(requestSpecification)
-            .basePath("/soap/user/get/" + userId)
-            .header("Accept", "application/soap+xml")
-            .when()
-            .get()
-            .then()
-            .spec(responseSpecification);
-    }
-
-
 }
