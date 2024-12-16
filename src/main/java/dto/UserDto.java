@@ -1,6 +1,6 @@
 package dto;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,12 +14,11 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
-    private int id;
-    private int petId;
-    private int quantity;
-    private String shipDate;
-    private String status;
-    private Boolean completeStatus;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserDto {
+    private String name;
+    private String course;
+    private String email;
+    private int age;
 }
+

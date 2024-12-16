@@ -20,6 +20,12 @@
         <jackson-databind.version>2.18.1</jackson-databind.version>
         <checkstyle.version>3.4.0</checkstyle.version>
         <spotbugs.version>4.8.5.0</spotbugs.version>
+        <wiremock.version>3.10.0</wiremock.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <log4j2.version>2.22.1</log4j2.version>
+        <citrus.version>4.3.2</citrus.version>
+        <jakarta.xml.version>4.0.2</jakarta.xml.version>
+        <h2.version>2.3.232</h2.version>
     </properties>
 
     <dependencies>
@@ -49,6 +55,70 @@
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-endpoint-catalog</artifactId>
+            <version>${citrus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-junit5</artifactId>
+            <version>${citrus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-spring</artifactId>
+            <version>${citrus.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-http</artifactId>
+            <version>${citrus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-ws</artifactId>
+            <version>${citrus.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.citrusframework</groupId>
+            <artifactId>citrus-sql</artifactId>
+            <version>${citrus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+            <version>${jakarta.xml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -86,6 +156,14 @@
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>${spotbugs.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>15</source>
+                    <target>15</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
