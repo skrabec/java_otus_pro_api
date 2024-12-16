@@ -1,0 +1,12 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <GetUserResponse>
+            <User>
+                <Name>Test user</Name>
+                <Course>QA</Course>
+                <Email>test@test.test</Email>
+                <Age>23</Age>
+            </User>
+        </GetUserResponse>
+    </soap:Body>
+</soap:Envelope>
