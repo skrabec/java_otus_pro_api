@@ -2,7 +2,6 @@ package services;
 
 import static io.restassured.RestAssured.given;
 
-import dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
@@ -10,13 +9,14 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.hamcrest.Matchers;
 
-public class StoreApi {
+public class CoursesApi {
+
     private RequestSpecification requestSpecification;
     private ResponseSpecification responseSpecification;
 
-    public StoreApi(){
+    public CoursesApi(){
         requestSpecification = given()
-            .baseUri(System.getProperty("base.url"))
+            .baseUri("http://localhost:8080")
             .contentType(ContentType.JSON)
             .log().all();
 
@@ -25,44 +25,33 @@ public class StoreApi {
         responseSpecification.time(Matchers.lessThan(5000L));
     }
 
-    public ValidatableResponse createOrder(OrderDto storeOrderDto) {
-
+    public ValidatableResponse getScore(int userId) {
         return given(requestSpecification)
-            .basePath("store/order")
-            .body(storeOrderDto)
-        .when()
-            .post()
-        .then()
-            .spec(responseSpecification);
-    }
-
-    public ValidatableResponse checkCreatedOrder(int orderId, OrderDto storeOrderDto) {
-        return given(requestSpecification)
-            .basePath("store/order/" + orderId)
+            .basePath("/user/get/" + userId)
+            .header("Accept", "application/json")
             .when()
             .get()
             .then()
             .spec(responseSpecification);
-
     }
 
-    public ValidatableResponse findAnOrder(int orderId) {
+    public ValidatableResponse getCourses() {
         return given(requestSpecification)
-            .basePath("store/order/" + orderId)
-        .when()
-            .get()
-        .then()
-            .spec(responseSpecification)
-            .log().all();
-    }
-
-    public ValidatableResponse deleteAnOrder(int orderId){
-        return given(requestSpecification)
-            .basePath("store/order/" + orderId)
+            .basePath("/courses/get/all")
+            .header("Accept", "application/json")
             .when()
-            .delete()
+            .get()
             .then()
             .spec(responseSpecification);
+    }
 
+    public ValidatableResponse getUsers() {
+        return given(requestSpecification)
+            .basePath("/user/get/all")
+            .header("Accept", "application/json")
+            .when()
+            .get()
+            .then()
+            .spec(responseSpecification);
     }
 }
