@@ -18,7 +18,7 @@ pipeline {
 
                     // Read Dockerfile content
                     def dockerfile = readFile('Dockerfile')
-                    
+
                     // Check for FROM instruction
                     if (!dockerfile.toLowerCase().trim().contains('from ')) {
                         error "Dockerfile validation failed: No source image provided with FROM instruction"
@@ -26,6 +26,12 @@ pipeline {
 
                     echo "Dockerfile validation passed"
                 }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'mvn clean test'
             }
         }
     }
