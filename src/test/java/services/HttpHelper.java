@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 public class HttpHelper {
-    WireMockServer wireMockServer = new WireMockServer(8080);
+    WireMockServer wireMockServer = new WireMockServer(8181);
 
     @BeforeEach
     public void startMocks() {
