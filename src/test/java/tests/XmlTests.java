@@ -14,7 +14,7 @@ public class XmlTests extends SoapHelper {
         Response response = given()
             .header("Accept", "application/xml") // Specify that we expect XML
             .when()
-            .get("http://localhost:8080/soap/user/get/1") // Replace with your API's endpoint
+            .get("http://localhost:8282/soap/user/get/1") // Replace with your API's endpoint
             .then()
             .statusCode(200) // Assert that the status code is 200
             .extract()

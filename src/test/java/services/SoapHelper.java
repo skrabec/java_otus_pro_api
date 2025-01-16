@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import java.io.IOException;
 
 public class SoapHelper {
-    WireMockServer wireMockServer = new WireMockServer(8080);
+    WireMockServer wireMockServer = new WireMockServer(8282);
 
     @BeforeEach
     public void startMocks() throws IOException {
