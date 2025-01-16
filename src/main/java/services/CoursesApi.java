@@ -16,7 +16,7 @@ public class CoursesApi {
 
     public CoursesApi(){
         requestSpecification = given()
-            .baseUri("http://localhost:8080")
+            .baseUri("http://localhost:8181")
             .contentType(ContentType.JSON)
             .log().all();
 
