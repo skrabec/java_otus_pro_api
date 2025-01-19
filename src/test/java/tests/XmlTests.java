@@ -4,11 +4,16 @@ package tests;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import services.SoapHelper;
 
+@Feature("XML tests")
 public class XmlTests extends SoapHelper {
+
+    @Description("Get users test")
     @Test
     public void getUsersTest() {
         Response response = given()

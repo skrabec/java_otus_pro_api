@@ -34,6 +34,27 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
+
+        stage('Verify Allure Results') {
+            steps {
+                sh 'ls -la target/allure-results || true'
+            }
+        }
+
+        stage('Publish allure report') {
+            steps {
+                script {
+                    allure([
+                            includeProperties: true,
+                            jdk: '',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']],
+                            report: 'target/allure-report'
+                    ])
+                }
+            }
+        }
     }
 
     post {

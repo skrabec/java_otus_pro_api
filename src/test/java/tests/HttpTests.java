@@ -12,15 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import dto.CoursesDto;
 import dto.ScoreDto;
 import dto.UserDto;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Test;
 import services.CoursesApi;
 import services.HttpHelper;
 import java.util.List;
 
+@Feature("HTTP tests")
 public class HttpTests extends HttpHelper {
 
     private CoursesApi coursesApi = new CoursesApi();
 
+    @Description("Get score test")
     @Test
     public void getScoreTest() {
         ScoreDto score = coursesApi.getScore(1)
@@ -32,6 +36,7 @@ public class HttpTests extends HttpHelper {
         assertEquals(78, score.getScore());
     }
 
+    @Description("Get users test")
     @Test
     public void getUsersTest() {
         List<UserDto> users = coursesApi.getUsers()
@@ -52,7 +57,7 @@ public class HttpTests extends HttpHelper {
 
     }
 
-
+    @Description("Get courses test")
     @Test
     public void getCourses() {
         List<CoursesDto> courses = coursesApi.getCourses()
